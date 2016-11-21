@@ -8,7 +8,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.pushtorefresh.storio.StorIOException;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.impl.DefaultStorIOSQLite;
 import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
@@ -44,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         init();
-
-        addStudents();
     }
 
     private void init() {
@@ -64,39 +61,40 @@ public class MainActivity extends AppCompatActivity {
         mStudentAdapter = new StudentAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mStudentAdapter);
+        updateList();
     }
 
-    private void addStudents() {
+    @OnClick(R.id.add_mock)
+    public void addStudents() {
         final List<Student> students = new ArrayList<Student>();
 
         for (int i = 0; i < 10; i++) {
             students.add(Student.newStudent("name is " + i, i));
         }
 
-        try {
-
-            PutResults<Student> results = mStorIOSQLite
-                    .put()
-                    .objects(students)
-                    .prepare()
-                    .executeAsBlocking();
+        PutResults<Student> results = mStorIOSQLite
+                .put()
+                .objects(students)
+                .prepare()
+                .executeAsBlocking();
 
 
-            Log.d("TAG", "size: " + results.results().size());
+        Log.d("TAG", "size: " + results.results().size());
 
-            updateList();
-
-
-
-        } catch (StorIOException e) {
-            Log.d("TAG", " Exception ! " + e);
-        }
+        updateList();
     }
 
     @OnClick(R.id.add_student)
     public void addStudent() {
-        final Student student = Student.newStudent(mNameEditText.getText().toString(),
-                Integer.valueOf(mAverageEditText.getText().toString()));
+        String value = mNameEditText.getText().toString().trim();
+        value = (value == null || value.equals("")) ?
+                "default value" : value;
+
+        String averageStr = mAverageEditText.getText().toString().trim();
+        Integer averageInt = averageStr.equals("") ? 0 : Integer.valueOf(averageStr);
+
+        final Student student = Student.newStudent(value,
+                averageInt);
 
         Log.d("TAG", "prepear student with name " + student.name() + " and average: " + student.average());
 

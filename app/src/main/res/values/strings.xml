@@ -3,4 +3,5 @@
     <string name="new_student">new student</string>
     <string name="hint_name">name...</string>
     <string name="hint_average">average...</string>
+    <string name="add_mock">add mock</string>
 </resources>

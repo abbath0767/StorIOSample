@@ -35,6 +35,12 @@
         android:layout_height="wrap_content"
         android:text="@string/new_student"/>
 
+    <Button
+        android:id="@+id/add_mock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_mock"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/student_recycler_view"
         android:layout_width="match_parent"
