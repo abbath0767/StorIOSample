@@ -24,7 +24,7 @@ public class StudentTable {
     public static String getCreateTabelQuery() {
         return "CREATE TABLE " + TABLE + "("
                     + COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY, "
-                    + COLUMN_NAME + " TEXT NOT NULL"
+                    + COLUMN_NAME + " TEXT NOT NULL, "
                     + COLUMN_AVERAGE + " INTEGER NOT NULL" + ");";
     }
 

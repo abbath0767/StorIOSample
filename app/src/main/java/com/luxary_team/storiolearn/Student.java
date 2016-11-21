@@ -31,11 +31,11 @@ public class Student {
         this.average = average;
     }
 
-    private static Student newStudent(@Nullable Long id, @NotNull String name, @NotNull Integer average) {
+    public static Student newStudent(@Nullable Long id, @NotNull String name, @NotNull Integer average) {
         return new Student(id, name, average);
     }
 
-    private static Student newStudent(@NotNull String name, @NotNull Integer average) {
+    public static Student newStudent(@NotNull String name, @NotNull Integer average) {
         return new Student(null, name, average);
     }
 
